@@ -9,7 +9,7 @@ const sg = await seagulls.init(),
    render_shader  = await seagulls.import( './render.wgsl' ),
    compute_shader = await seagulls.import( './compute.wgsl' );
 
-const NUM_PARTICLES = 300,
+const NUM_PARTICLES = 200,
    // must be evenly divisble by 4 to use wgsl structs
    NUM_PROPERTIES = 4,
    state = new Float32Array( NUM_PARTICLES * NUM_PROPERTIES );
@@ -48,5 +48,5 @@ sg.buffers({ state })
    .compute( compute_shader, NUM_PARTICLES / (WORKGROUP_SIZE*WORKGROUP_SIZE) )
    .render( render_shader )
    .onframe( ()=>  sg.uniforms.frame = frame++  )
-   .run(tpParams.bubbleCount);
+   .run(NUM_PARTICLES);
 
